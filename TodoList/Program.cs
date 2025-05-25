@@ -48,7 +48,7 @@ do
             AddTodo(todos);
             break;
         case "R":
-            PrintSelectedOption("Remove a TODO");
+            RemoveTodo();
             break;
         case "E":
             PrintSelectedOption("I'm about to leave the program!");
@@ -128,10 +128,39 @@ void AddTodo(List<string> todos)
 }
 
 //Metodo per la rimozione dei TODO
-void RemoveTodo(List<string> todos)
+void RemoveTodo()
 {
+    if (todos == null || todos.Count == 0)
+    {
+        Console.WriteLine("No TODOs have been added yet.");
+        return;
+    }
 
+    Console.WriteLine("Select the index of the TODO you want to remove: ");
+    for (int i = 0; i < todos.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {todos[i]}");
+    }
+
+    Console.Write("Enter the number of the TODO to remove: ");
+    string input = Console.ReadLine();
+    if (string.IsNullOrWhiteSpace(input))
+    {
+        Console.WriteLine("Input cannot be empty. No TODO is removed.");
+        Console.WriteLine();
+        return;
+    }
+    int indexTodo;
+    if (int.TryParse(input, out indexTodo) && indexTodo >= 1 && indexTodo <= todos.Count)
+    {
+        string removed = todos[indexTodo - 1];
+        todos.RemoveAt(indexTodo - 1);
+        Console.WriteLine("TODO removed: " + removed);
+    }
+    else
+    {
+        Console.WriteLine("The given index is not valid. No TODO is removed.");
+    }
+    Console.WriteLine();
 }
 
-
-Console.ReadKey();
