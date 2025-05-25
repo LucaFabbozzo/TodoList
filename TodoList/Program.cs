@@ -42,12 +42,11 @@ do
     switch (userChoice?.ToUpper())
     {
         case "S":
-            PrintSelectedOption("See all TODOs");
             PrintAllTodo(todos);
             Console.WriteLine();
             break;
         case "A":
-            PrintSelectedOption("Add a TODO");
+            AddTodo(todos);
             break;
         case "R":
             PrintSelectedOption("Remove a TODO");
@@ -60,13 +59,13 @@ do
 
 
 
-//Funzione che permette di stampare a schermo l'opzione scelta
+//Metodo che permette di stampare a schermo l'opzione scelta
 void PrintSelectedOption(string selectedOption)
 {
     System.Console.WriteLine("Selected option: " + selectedOption);
 }
 
-//Funzione che stampa tutte le opzioni disponibili
+//Metodo che stampa tutte le opzioni disponibili
 void PrintAllAvailableOptions()
 {
     Console.WriteLine("What do you want to do?");
@@ -76,7 +75,7 @@ void PrintAllAvailableOptions()
     Console.WriteLine("[E]xit");
 }
 
-
+//Metodo che stampa tutti i TODO inseriti dall'utente
 void PrintAllTodo(List<string> todos)
 {
     //Controlla se non ci sono ancora TODO inseriti dall'utente
@@ -95,6 +94,38 @@ void PrintAllTodo(List<string> todos)
         Console.WriteLine($"{i + 1}. {todos[i]}");
     }
 }
+
+
+//Metodo che aggiunge TODO unici alla lista
+void AddTodo(List<string> todos)
+{
+    string todo;
+    do
+    {
+        Console.Write("Enter the TODO description: ");
+        todo = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(todo))
+        {
+            Console.WriteLine("The description cannot be empty.");
+            continue;
+        }
+
+        // Rimuove eventuali spazi bianchi all'inizio e alla fine della descrizione inserita dall'utente.
+        string trimmedTodo = todo.Trim();
+        if (todos.Contains(trimmedTodo))
+        {
+            Console.WriteLine("The description must be unique.");
+            todo = null; // Force the loop to continue
+        }
+        else
+        {
+            todos.Add(trimmedTodo);
+            Console.WriteLine("TODO successfully added:" + trimmedTodo);
+            break;
+        }
+    } while (true);
+}
+
 
 
 Console.ReadKey();
