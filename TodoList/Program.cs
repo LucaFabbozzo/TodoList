@@ -5,7 +5,7 @@
 /// - Rimuovere un TODO esistente
 /// - Uscire dal programma
 
-/// Le funzioni ausiliarie gestiscono la stampa delle opzioni, la visualizzazione dei TODO
+/// I metodi ausiliari gestiscono la stampa delle opzioni, la visualizzazione, l'aggiunta e l'eliminazione dei TODO
 /// e la conferma dell'opzione selezionata.
 
 
@@ -14,7 +14,7 @@
 
 // Lista che contiene tutti i TODO inseriti dall'utente
 List<string> todos = new List<string>();
-// array delle lettere valide per le opzioni della TODO
+// Array delle lettere valide per le opzioni della TODO
 string[] validChoices = { "S", "A", "R", "E" };
 // Variabile per memorizzare la scelta dell'utente nel menu
 string userChoice;
@@ -43,7 +43,6 @@ do
     {
         case "S":
             PrintAllTodo(todos);
-            Console.WriteLine();
             break;
         case "A":
             AddTodo(todos);
@@ -93,6 +92,7 @@ void PrintAllTodo(List<string> todos)
     {
         Console.WriteLine($"{i + 1}. {todos[i]}");
     }
+    Console.WriteLine();
 }
 
 
@@ -124,8 +124,14 @@ void AddTodo(List<string> todos)
             break;
         }
     } while (true);
+    Console.WriteLine();
 }
 
+//Metodo per la rimozione dei TODO
+void RemoveTodo(List<string> todos)
+{
+
+}
 
 
 Console.ReadKey();
